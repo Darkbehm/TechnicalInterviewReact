@@ -34,6 +34,14 @@ function Reports() {
             products[data[i].id] = data[i].name;
         }
         setProducts(products);
+        const newOptions = {
+            ...options,
+            'product': {
+                'id': Object.keys(products)[0],
+                'name': products[Object.keys(products)[0]],
+            }
+        }
+        setOptions(newOptions);
         getBrands(Object.keys(products)[0]);
     }
 
@@ -43,6 +51,7 @@ function Reports() {
         for (let i = 0; i < data.length; i++) {
             brands[data[i].id] = data[i].name;
         }
+
         setBrands(brands);
     }
 

@@ -15,25 +15,29 @@ ChartJS.register(
 const BarChart = (props) => {
     const [arrayLabels, setLabels] = useState([]);
     const [arrayData, setData] = useState([]);
-    
+    const [productName, setProductName] = useState('');
+    const [brandName, setBrandName] = useState('');
+
     const getData = async (props) => {
-        const {data} = await SaleService.get(props.options.product.id, props.options.brand.id);
-        const {Labels, Data} = data;
+        const { data } = await SaleService.get(props.options.product.id, props.options.brand.id);
+        const { Labels, Data } = data;
         setLabels(Labels);
+        setProductName(props.options.product.name);
+        setBrandName(props.options.brand.name);
         setData(Data);
     }
-    
-    
+
+
     useEffect(() => {
         getData(props);
     }, [props]);
-        
-    
+
+
     let data = {
         labels: arrayLabels,
         datasets: [{
             title: 'Ventas',
-            label: props.options.product.name,
+            label: productName,
             backgroundColor: [
                 'rgba(51, 153, 255, 1)'
             ],
@@ -48,10 +52,24 @@ const BarChart = (props) => {
     }
 
     const Options = {
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Ventas',
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Meses'
+                }
+            }
+        },
         plugins: {
             legend: {
                 display: true,
-                position : 'bottom',
+                position: 'bottom',
                 labels: {
                     boxWidth: 15,
                     color: 'black',
@@ -59,24 +77,23 @@ const BarChart = (props) => {
                         size: 15
                     },
                 },
-                onClick : null
+                onClick: null
             },
         },
     };
 
     return (
-        //tree combobox
-        <div>          
+        <div>
             <div>
-                <h4>Ventas por mes para {props.options.product.name}</h4>
-            </div>                  
+                <h4>Ventas por mes para {productName}</h4>
+            </div>
             <Bar
                 data={data}
                 height={100}
                 options={Options}
             />
         </div>
-        );
+    );
 }
 
 export default BarChart;
