@@ -11,7 +11,7 @@ const Navbar = () => {
                 <div className="NavBarLogo">
                     <span>User Name</span>
                 </div>
-                <Link to="/reports" className="NavBarItem">Reportes de ventas</Link>
+                <Link to="/" className="NavBarItem">Reportes de ventas</Link>
             </nav>
         </div>
     );

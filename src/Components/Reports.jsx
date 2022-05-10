@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
-import './Reports.css';
 import BarChart from './BarChart';
 import Navbar from './NavBar';
 import ProductService from '../Services/Products';
 import BrandService from '../Services/Brands';
 
 function Reports() {
-    const [categories, setCategories] = useState({});
+    const [categories, setCategories] = useState({
+        "1": "Alimentos",
+        "2": "Automoviles",
+        "3": "Computadoras"
+    });
     const [products, setProducts] = useState({});
     const [brands, setBrands] = useState({});
     const [selectedCategory, setSelectedCategory] = useState(1);
     const [selectedProduct, setSelectedProduct] = useState(1);
+
     const [options, setOptions] = useState({
         'product': {
             'id': '1',
@@ -30,6 +34,7 @@ function Reports() {
             products[data[i].id] = data[i].name;
         }
         setProducts(products);
+        getBrands(Object.keys(products)[0]);
     }
 
     const getBrands = async (product) => {
@@ -42,14 +47,9 @@ function Reports() {
     }
 
     useEffect(() => {
-        setCategories({
-            "1": "Alimentos",
-            "2": "Automoviles",
-            "3": "Computadoras"
-        });
         getProducts(selectedCategory);
         getBrands(selectedProduct);
-    }, []);
+    },[]);
 
     const handleChangeCategory = (e) => {
         const { value } = e.target;
@@ -89,8 +89,6 @@ function Reports() {
         setOptions(newOptions);
     }
 
-
-
     return (
         <div className="App">
             {/* navbar */}
@@ -110,7 +108,6 @@ function Reports() {
                         }
                     </select>
                 </div>
-
 
                 <div className="combobox">
                     <span>Producto: </span>
