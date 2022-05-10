@@ -1,12 +1,25 @@
+This project uses a locally hosted api to get random data:
+
+That project is:
+https://github.com/Darkbehm/TestAPI
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+First of all to install all dependencies do:
+
+```
+npm install
+```
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+```
+npm start
+```
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
